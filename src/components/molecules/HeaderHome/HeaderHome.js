@@ -28,6 +28,13 @@ const Index = () => {
         img: DummyBanner2,
         color: colors.black,
       },
+      {
+        title: 'Hoodie Collection',
+        text: 'Latest shoe recommendations which is being hit right now',
+        background: '#286BC7',
+        img: DummyBanner1,
+        color: colors.white,
+      },
     ],
   });
 
@@ -72,8 +79,8 @@ const Index = () => {
       <Carousel
         layout="default"
         data={carousel.carouselItems}
-        sliderWidth={300}
-        itemWidth={300}
+        sliderWidth={350}
+        itemWidth={350}
         renderItem={renderBanner}
         onSnapToItem={index => setCarousel({...carousel, activeIndex: index})}
         loop={true}
@@ -81,6 +88,15 @@ const Index = () => {
         enableMomentum={false}
         lockScrollWhileSnapping={true}
       />
+      <View style={styles.dotWrapper}>
+        {carousel.carouselItems.map((item, key) => {
+          if (carousel.activeIndex === key) {
+            return <View key={key} style={styles.dot(colors.dot.active)} />;
+          } else {
+            return <View key={key} style={styles.dot(colors.dot.inActive)} />;
+          }
+        })}
+      </View>
     </Layout>
   );
 };

@@ -14,6 +14,7 @@
     "@ui-kitten/components": "^5.1.0",
     "@ui-kitten/eva-icons": "^5.1.0",
     "@ui-kitten/metro-config": "^5.1.0",
+    "axios": "^0.21.1",
     "react": "17.0.1",
     "react-native": "0.64.0",
     "react-native-snap-carousel": "^3.9.1",

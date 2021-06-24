@@ -28,7 +28,6 @@ const styles = StyleSheet.create({
     marginTop: 20,
     height: 125,
     width: '100%',
-    marginBottom: 30,
     backgroundColor: background,
     borderRadius: 15,
     flexDirection: 'row',
@@ -58,6 +57,19 @@ const styles = StyleSheet.create({
     width: 65,
     borderWidth: 0,
   },
+  dotWrapper: {
+    flexDirection: 'row',
+    marginTop: -25,
+    marginBottom: 30,
+    justifyContent: 'center',
+  },
+  dot: active => ({
+    width: 10,
+    height: 10,
+    backgroundColor: active,
+    marginHorizontal: 5,
+    borderRadius: 5,
+  }),
 });
 
 export default styles;

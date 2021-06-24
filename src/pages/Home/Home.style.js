@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 20,
     marginTop: -20,
     backgroundColor: colors.white,
+    padding: 25,
   },
 });
 
