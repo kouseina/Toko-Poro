@@ -1,4 +1,5 @@
-import SearchBox from './SearchBox/SearchBox';
-import Loading from './Loading/Loading';
+import SearchBox from './SearchBox';
+import Loading from './Loading';
+import TabItem from './TabItem';
 
-export {SearchBox, Loading};
+export {SearchBox, Loading, TabItem};

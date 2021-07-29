@@ -2,13 +2,9 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import {Icon, Input} from '@ui-kitten/components';
 
-// style
-import styles from './SearchBox.style';
-import {colors} from '../../../utils';
-
 const Index = ({value, onChangeText}) => {
   const RenderIconSearch = props => (
-    <Icon {...props} name="search" style={styles.icon} fill={colors.white} />
+    <Icon {...props} name="search" style={styles.icon} fill="#FFF" />
   );
 
   return (
@@ -23,5 +19,17 @@ const Index = ({value, onChangeText}) => {
     />
   );
 };
+
+const styles = StyleSheet.create({
+  search: {
+    borderRadius: 7,
+    flex: 1,
+    marginRight: 18,
+  },
+  icon: {
+    width: 24,
+    height: 24,
+  },
+});
 
 export default Index;

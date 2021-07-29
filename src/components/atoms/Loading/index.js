@@ -1,8 +1,6 @@
 import React from 'react';
 import {Layout, Spinner} from '@ui-kitten/components';
-
-// style
-import styles from './Loading.style';
+import {StyleSheet} from 'react-native';
 
 const Index = () => {
   return (
@@ -11,5 +9,12 @@ const Index = () => {
     </Layout>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+  },
+});
 
 export default Index;

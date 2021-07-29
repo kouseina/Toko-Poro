@@ -1,4 +1,3 @@
-import HeaderHome from './HeaderHome/HeaderHome';
-import ProductSlider from './ProductSlider/ProductSlider';
+import BottomNavigator from './BottomNavigator';
 
-export {HeaderHome, ProductSlider};
+export {BottomNavigator};

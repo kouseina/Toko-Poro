@@ -11,17 +11,11 @@
  */
 
 import React from 'react';
-import {
-  ApplicationProvider,
-  Button,
-  Icon,
-  IconRegistry,
-  Layout,
-  Text,
-} from '@ui-kitten/components';
+import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
 import * as eva from '@eva-design/eva';
-import {HomePage} from './pages';
+import {NavigationContainer} from '@react-navigation/native';
+import Router from './router';
 
 /**
  * Use any valid `name` property from eva icons (e.g `github`, or `heart-outline`)
@@ -32,7 +26,9 @@ export default () => (
   <>
     <IconRegistry icons={EvaIconsPack} />
     <ApplicationProvider {...eva} theme={eva.light}>
-      <HomePage />
+      <NavigationContainer>
+        <Router />
+      </NavigationContainer>
     </ApplicationProvider>
   </>
 );
