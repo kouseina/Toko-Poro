@@ -1,5 +1,6 @@
 const mainColors = {
-  yellow1: '#FFC33A',
+  yellow1: '#FFAA00',
+  yellow2: '#FFE59E',
   blue1: '#0061D4',
   blue2: '#025AB4',
   blue3: '#286BC7',
@@ -13,7 +14,7 @@ const mainColors = {
 
 export const colors = {
   primary: mainColors.yellow1,
-  secondary: mainColors.blue1,
+  secondary: mainColors.yellow2,
   white: mainColors.white1,
   black: mainColors.black1,
   background: {

@@ -1,3 +1,4 @@
 import BottomNavigator from './BottomNavigator';
+import Carousel from './Carousel';
 
-export {BottomNavigator};
+export {BottomNavigator, Carousel};
