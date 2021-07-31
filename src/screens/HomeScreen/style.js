@@ -5,4 +5,8 @@ export default StyleSheet.create({
     width: 30,
     height: 30,
   },
+  searchBox: {
+    height: 50,
+    marginBottom: 15,
+  },
 });

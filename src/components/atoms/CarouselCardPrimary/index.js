@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {colors} from '../../../utils';
 import Gap from '../Gap';
 
 export const SLIDER_WIDTH = Dimensions.get('window').width - 50;
@@ -26,7 +25,7 @@ const CarouselCardPrimary = ({item, index, onPress}) => {
               <Text style={styles.subHeader}>- BY FINTEX</Text>
               <Gap width={20} />
               <View style={styles.wrapper}>
-                <Icon name="calendar" style={styles.icon} fill="#FFF" />
+                <Icon name="calendar" style={styles.icon} fill="white" />
                 <Gap width={5} />
                 <Text style={styles.subHeader}>{item.date}</Text>
               </View>
@@ -56,12 +55,12 @@ const styles = StyleSheet.create({
     paddingBottom: 25,
   },
   header: {
-    color: colors.white,
+    color: 'white',
     fontSize: 22,
     fontWeight: 'bold',
   },
   subHeader: {
-    color: colors.white,
+    color: 'white',
     fontSize: 13,
     fontWeight: 'bold',
   },

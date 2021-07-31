@@ -43,7 +43,13 @@ const TabItem = ({title, active, onPress, onLongPress}) => {
       onPress={onPress}
       onLongPress={onLongPress}>
       <TabIcon />
-      <Text style={styles.text(active)}>{title}</Text>
+      <Text
+        style={[
+          styles.text,
+          {color: active ? colors.primary : colors.secondary},
+        ]}>
+        {title}
+      </Text>
     </TouchableOpacity>
   );
 };
@@ -52,11 +58,10 @@ export default TabItem;
 
 const styles = StyleSheet.create({
   container: {alignItems: 'center'},
-  text: active => ({
+  text: {
     fontSize: 12,
-    color: active ? colors.primary : colors.secondary,
     marginTop: 4,
-  }),
+  },
   icon: {
     width: 25,
     height: 25,
