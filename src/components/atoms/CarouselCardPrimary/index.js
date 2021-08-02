@@ -8,6 +8,7 @@ import {
   View,
 } from 'react-native';
 import Gap from '../Gap';
+import LabelCategory from '../LabelCategory';
 
 export const SLIDER_WIDTH = Dimensions.get('window').width - 50;
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 1);
@@ -20,6 +21,13 @@ const CarouselCardPrimary = ({item, index, onPress}) => {
         resizeMode="cover"
         style={styles.image}>
         <Layout style={styles.innerContainer}>
+          {item.category && (
+            <View style={styles.wrapperCategory}>
+              {item.category.map((cat, index) => (
+                <LabelCategory text={cat} key={index} />
+              ))}
+            </View>
+          )}
           <TouchableOpacity onPress={onPress}>
             <View style={styles.wrapper}>
               <Text style={styles.subHeader}>- BY FINTEX</Text>
@@ -78,6 +86,13 @@ const styles = StyleSheet.create({
   wrapper: {
     flexDirection: 'row',
     paddingBottom: 15,
+  },
+  wrapperCategory: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    position: 'absolute',
+    top: 20,
+    left: 20,
   },
 });
 

@@ -1,19 +1,19 @@
 import {Layout, Text} from '@ui-kitten/components';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {CardNews, Gap} from '../../atoms';
+import {CardBlockChain, Gap} from '../../atoms';
 
-const ListCardNews = () => {
+const ListCardBlockChain = () => {
   return (
     <Layout style={styles.container}>
       {data.map((news, index) => (
         <>
-          <CardNews
+          <CardBlockChain
             key={index}
             image={news.imgUrl}
             title={news.title}
-            category={news.category}
             onPress={() => alert('news: ', index)}
+            category={news.category}
           />
           <Gap height={30} />
         </>
@@ -22,7 +22,7 @@ const ListCardNews = () => {
   );
 };
 
-export default ListCardNews;
+export default ListCardBlockChain;
 
 const styles = StyleSheet.create({
   container: {
@@ -35,33 +35,19 @@ const data = [
     title: 'Mengenal Istilah Yield Farming dan Crypto Staking',
     imgUrl: 'https://fintexnews.com/wp-content/uploads/2021/06/farming.png',
     date: '30 JUNI 2021',
-    category: ['investment'],
+    category: ['CRYPTOCURRENCY', 'ethereum'],
   },
   {
     title: 'DEX yang Lagi Naik Daun, Apa Itu Uniswap dan Pancakeswap?',
     imgUrl: 'https://fintexnews.com/wp-content/uploads/2021/06/DEX-890x450.png',
     date: '30 JUNI 2021',
-    category: ['binance', 'ethereum'],
+    category: ['market', 'investment'],
   },
   {
     title:
       'Wow! Bitcoin Mulai Goyah, Dominasinya di Pasar Crypto Tergerus Ether',
     imgUrl: 'https://fintexnews.com/wp-content/uploads/2021/07/tko-890x450.png',
     date: '30 JUNI 2021',
-    category: ['cryptocurrency', 'ethereum'],
-  },
-  {
-    title:
-      'Keren! Teknologi Blockchain Jadi Solusi Keruwetan Rantai Distribusi Vaksin Covid-19',
-    imgUrl:
-      'https://fintexnews.com/wp-content/uploads/2021/07/vaksin-890x450.png',
-    date: '30 JUNI 2021',
-    category: ['blockchain'],
-  },
-  {
-    title: 'Kenapa Non Fungible Token atau NFT itu Dibilang Unik?',
-    imgUrl: 'https://fintexnews.com/wp-content/uploads/2021/06/NFT-890x450.png',
-    date: '30 JUNI 2021',
-    category: ['blockchain'],
+    category: ['bitcoin', 'success story'],
   },
 ];

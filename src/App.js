@@ -16,6 +16,7 @@ import {EvaIconsPack} from '@ui-kitten/eva-icons';
 import * as eva from '@eva-design/eva';
 import {NavigationContainer} from '@react-navigation/native';
 import Router from './router';
+import mapping from '../mapping.json';
 
 /**
  * Use any valid `name` property from eva icons (e.g `github`, or `heart-outline`)
@@ -25,7 +26,7 @@ import Router from './router';
 export default () => (
   <>
     <IconRegistry icons={EvaIconsPack} />
-    <ApplicationProvider {...eva} theme={eva.light}>
+    <ApplicationProvider {...eva} theme={eva.light} customMapping={mapping}>
       <NavigationContainer>
         <Router />
       </NavigationContainer>

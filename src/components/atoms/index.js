@@ -6,6 +6,8 @@ import Gap from './Gap';
 import CarouselCardPrimary from './CarouselCardPrimary';
 import Title from './Title';
 import CardNews from './CardNews';
+import CardBlockChain from './CardBlockChain';
+import LabelCategory from './LabelCategory';
 
 export {
   SearchBox,
@@ -16,4 +18,6 @@ export {
   CarouselCardPrimary,
   Title,
   CardNews,
+  CardBlockChain,
+  LabelCategory,
 };

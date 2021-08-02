@@ -38,16 +38,19 @@ const data = [
     title: 'JAS, Telkomnya Thailand Mulai Masuk ke Bisnis Penambangan Bitcoin',
     imgUrl: 'https://fintexnews.com/wp-content/uploads/2021/07/JAS-890x450.png',
     date: '30 JUNI 2021',
+    category: ['binance', 'ethereum'],
   },
   {
     title: 'Kenapa Non Fungible Token atau NFT itu Dibilang Unik?',
     imgUrl: 'https://fintexnews.com/wp-content/uploads/2021/06/NFT-890x450.png',
     date: '16 JUNI 2021',
+    category: ['cryptocurrency', 'ethereum'],
   },
   {
     title: 'Biar Aman! Kamu Harus Tahu Wallet Crypto Terbaik Saat Ini',
     imgUrl:
       'https://fintexnews.com/wp-content/uploads/2021/06/cypto_wallet-890x450.png',
     date: '14 JUNI 2021',
+    category: ['blockchain'],
   },
 ];
