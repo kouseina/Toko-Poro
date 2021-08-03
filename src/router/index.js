@@ -3,6 +3,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
   CryptoScreen,
+  DetailArticleScreen,
   HomeScreen,
   InvestmentScreen,
   TrendsScreen,
@@ -28,6 +29,7 @@ const Router = () => {
     <Stack.Navigator initialRouteName="MainApp" headerMode="none">
       <Stack.Screen name="MainApp" component={MainApp} />
       <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="DetailArticle" component={DetailArticleScreen} />
     </Stack.Navigator>
   );
 };

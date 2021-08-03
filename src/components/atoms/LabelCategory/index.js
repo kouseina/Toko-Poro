@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     fontWeight: '700',
     color: 'white',
+    fontSize: 10,
   },
   container: {
     padding: 5,

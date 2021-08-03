@@ -1,6 +1,7 @@
 import {Card, Layout} from '@ui-kitten/components';
 import React from 'react';
 import {SafeAreaView, ScrollView, Dimensions} from 'react-native';
+import RenderHTML from 'react-native-render-html';
 import WebView from 'react-native-webview';
 import YoutubeIframe from 'react-native-youtube-iframe';
 import {

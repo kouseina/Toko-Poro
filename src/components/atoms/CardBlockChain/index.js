@@ -3,9 +3,9 @@ import React from 'react';
 import {StyleSheet, View, TouchableOpacity, Image} from 'react-native';
 import LabelCategory from '../LabelCategory';
 
-const CardBlockChain = ({onPress, title, category, image}) => {
+const CardBlockChain = ({onPress, title, category, image, key}) => {
   return (
-    <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity onPress={onPress} key={key}>
       <Layout style={styles.container}>
         <Image
           source={{
@@ -37,13 +37,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   image: {
-    height: 90,
-    width: 90,
-    borderTopRightRadius: 10,
-    borderTopLeftRadius: 10,
+    height: 70,
+    width: 70,
+    borderRadius: 5,
   },
   title: {
     fontWeight: '700',
+    fontSize: 14,
   },
   wrapperTitle: {
     padding: 5,

@@ -35,7 +35,6 @@ const Index = ({value, onChangeText, onPressIn}) => {
 const styles = StyleSheet.create({
   search: {
     borderRadius: 7,
-    flex: 1,
   },
   icon: {
     width: 24,

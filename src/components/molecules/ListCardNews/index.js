@@ -1,22 +1,23 @@
+import {useNavigation} from '@react-navigation/native';
 import {Layout, Text} from '@ui-kitten/components';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {CardNews, Gap} from '../../atoms';
 
 const ListCardNews = () => {
+  const navigation = useNavigation();
   return (
     <Layout style={styles.container}>
       {data.map((news, index) => (
-        <>
+        <View style={styles.wrapperCard}>
           <CardNews
             key={index}
             image={news.imgUrl}
             title={news.title}
             category={news.category}
-            onPress={() => alert('news: ', index)}
+            onPress={() => navigation.navigate('DetailArticle')}
           />
-          <Gap height={30} />
-        </>
+        </View>
       ))}
     </Layout>
   );
@@ -27,6 +28,12 @@ export default ListCardNews;
 const styles = StyleSheet.create({
   container: {
     marginTop: 20,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  wrapperCard: {
+    width: '50%',
+    padding: 7,
   },
 });
 

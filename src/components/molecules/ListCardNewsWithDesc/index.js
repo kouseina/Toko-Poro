@@ -16,7 +16,7 @@ const ListCardNewsWithDesc = () => {
             category={news.category}
             onPress={() => alert('news: ', index)}
           />
-          <Gap height={35} />
+          <Gap height={15} />
         </>
       ))}
     </Layout>

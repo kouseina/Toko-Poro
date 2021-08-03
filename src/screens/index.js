@@ -3,6 +3,7 @@ import TrendsScreen from './TrendsScreen';
 import CryptoScreen from './CryptoScreen';
 import InvestmentScreen from './InvestmentScreen';
 import ExampleIconScreen from './ExampleIcon';
+import DetailArticleScreen from './DetailArticleScreen';
 
 export {
   HomeScreen,
@@ -10,4 +11,5 @@ export {
   CryptoScreen,
   InvestmentScreen,
   ExampleIconScreen,
+  DetailArticleScreen,
 };
