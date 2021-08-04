@@ -9,4 +9,11 @@ export default StyleSheet.create({
     height: 50,
     marginBottom: 15,
   },
+  wrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  flexWrap: {
+    flexWrap: 'wrap',
+  },
 });

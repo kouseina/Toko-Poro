@@ -46,7 +46,7 @@ export default CardNews;
 const styles = StyleSheet.create({
   container: {},
   image: {
-    height: 150,
+    minHeight: 150,
     borderTopRightRadius: 10,
     borderTopLeftRadius: 10,
   },

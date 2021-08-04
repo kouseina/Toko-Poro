@@ -1,6 +1,7 @@
+import {useNavigation} from '@react-navigation/native';
 import {Card, Layout} from '@ui-kitten/components';
 import React from 'react';
-import {SafeAreaView, ScrollView, Dimensions} from 'react-native';
+import {SafeAreaView, ScrollView, Dimensions, View} from 'react-native';
 import RenderHTML from 'react-native-render-html';
 import WebView from 'react-native-webview';
 import YoutubeIframe from 'react-native-youtube-iframe';
@@ -8,33 +9,37 @@ import {
   Carousel,
   ContentWrapper,
   Gap,
+  LabelCategory,
   ListCardBlockChain,
   ListCardNews,
   ListCardNewsWithDesc,
   SearchBox,
   Title,
 } from '../../components';
+import {API_URL} from '@env';
 
 // style
 import styles from './style';
+import axios from 'axios';
 
 const Home = () => {
   const width = Dimensions.get('window').width - 50;
-  // let JS =
-  //   '<script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>';
-  // let source =
-  //   JS +
-  //   '<blockquote class="twitter-tweet" data-lang="es"><p lang="en" dir="ltr">8 TED Talks to inspire projects with kids: <a href="https://twitter.com/TEDTalks/status/758116657638309896">https://twitter.com/TEDTalks/status/758116657638309896</a> <a href="https://twitter.com/TEDTalks/status/758116657638309896">pic.twitter.com/HMmYAeP7Km</a></p>&mdash; TED Talks (@TEDTalks) <a href="https://twitter.com/TEDTalks/status/758116657638309896">27 de julio de 2016</a></blockquote>';
-
   const source =
     '<a class="twitter-timeline" href="https://twitter.com/fintexnews?ref_src=twsrc%5Etfw">Tweets by fintexnews</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>';
+  const navigation = useNavigation();
 
   const [contentScroll, setContentScroll] = React.useState({});
+
+  React.useEffect(() => {
+    axios.get(`${API_URL}/api/post`).then(res => {
+      console.log('response: ', res.data.data);
+    });
+  }, []);
 
   return (
     <ContentWrapper style={styles.page}>
       <Layout style={styles.searchBox}>
-        <SearchBox />
+        <SearchBox onPressIn={() => navigation.navigate('Search')} />
       </Layout>
       <ScrollView
         showsVerticalScrollIndicator={false}
@@ -48,6 +53,17 @@ const Home = () => {
         <ListCardNews />
         <Gap height={20} />
         <Title text="latest news" />
+        <Gap height={15} />
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          <View style={[styles.wrapper, styles.flexWrap]}>
+            <LabelCategory text="investment" />
+            <LabelCategory text="market" />
+            <LabelCategory text="article" />
+            <LabelCategory text="fashion" />
+            <LabelCategory text="crypthograpy" />
+            <LabelCategory text="foto" />
+          </View>
+        </ScrollView>
         <ListCardNewsWithDesc />
         <Gap height={20} />
         <Title text="blockchain" />

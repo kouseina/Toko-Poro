@@ -8,7 +8,7 @@ import {
   ScrollView,
 } from 'react-native';
 import RenderHTML from 'react-native-render-html';
-import {ContentWrapper, Gap, Header} from '../../components';
+import {ContentWrapper, Gap, Header, LabelCategory} from '../../components';
 import {colors} from '../../utils';
 
 import styles from './style';
@@ -29,7 +29,7 @@ const DetailArticleScreen = () => {
           Kamu Perlu Tahu, Ini Deretan 6 Artis Indonesia Berinvestasi di Bitcoin
         </Text>
         <Gap height={20} />
-        <View style={styles.wrapperSpaceBetween}>
+        <View style={[styles.wrapper, styles.wrapperSpaceBetween]}>
           <View style={styles.wrapper}>
             <Text category="p2">31 Juli, 2021 by</Text>
             <Gap width={5} />
@@ -55,6 +55,15 @@ const DetailArticleScreen = () => {
           </View>
         </View>
         <Gap height={25} />
+        <View style={[styles.wrapper, styles.flexWrap]}>
+          <LabelCategory text="investment" />
+          <LabelCategory text="market" />
+          <LabelCategory text="article" />
+          <LabelCategory text="fashion" />
+          <LabelCategory text="crypthograpy" />
+          <LabelCategory text="foto" />
+        </View>
+        <Gap height={8} />
         <Image
           source={{
             uri: 'https://blog-api.adhiariyadi.com/uploads/posts/44581103082021fintex.png',

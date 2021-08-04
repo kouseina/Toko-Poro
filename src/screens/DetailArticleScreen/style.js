@@ -19,12 +19,13 @@ export default StyleSheet.create({
     marginLeft: 5,
   },
   wrapperSpaceBetween: {
-    flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
   },
   icon: {
     width: 20,
     height: 20,
+  },
+  flexWrap: {
+    flexWrap: 'wrap',
   },
 });

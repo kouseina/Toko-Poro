@@ -5,7 +5,7 @@ import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {SearchBox, Gap} from '..';
 import {colors} from '../../../utils';
 
-const Header = () => {
+const Header = ({autoFocus}) => {
   const navigation = useNavigation();
   return (
     <>
@@ -19,7 +19,7 @@ const Header = () => {
         </TouchableOpacity>
         <Gap width={15} />
         <View style={styles.searchBox}>
-          <SearchBox />
+          <SearchBox autoFocus={autoFocus} />
         </View>
       </View>
       <Gap height={20} />

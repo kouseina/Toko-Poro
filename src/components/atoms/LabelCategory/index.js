@@ -9,10 +9,7 @@ const LabelCategory = ({text, onPress, key}) => {
     <TouchableOpacity onPress={onPress}>
       <View
         key={key}
-        style={[
-          styles.container,
-          {backgroundColor: theme['color-primary-500']},
-        ]}>
+        style={[styles.container, {backgroundColor: theme['color-basic-900']}]}>
         <Text category="label" style={styles.text}>
           {text}
         </Text>

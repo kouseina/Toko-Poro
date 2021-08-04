@@ -6,6 +6,7 @@ import {
   DetailArticleScreen,
   HomeScreen,
   InvestmentScreen,
+  SearchScreen,
   TrendsScreen,
 } from '../screens';
 import {BottomNavigator} from '../components';
@@ -30,6 +31,7 @@ const Router = () => {
       <Stack.Screen name="MainApp" component={MainApp} />
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="DetailArticle" component={DetailArticleScreen} />
+      <Stack.Screen name="Search" component={SearchScreen} />
     </Stack.Navigator>
   );
 };

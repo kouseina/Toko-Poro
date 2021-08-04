@@ -33,10 +33,11 @@ const styles = StyleSheet.create({
   text: {
     fontWeight: '700',
     textTransform: 'uppercase',
+    fontSize: 16,
   },
   icon: {
-    height: 20,
-    width: 20,
+    height: 18,
+    width: 18,
     backgroundColor: colors.primary,
     borderRadius: 18,
     borderColor: 'white',
@@ -50,8 +51,8 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   iconSecond: {
-    height: 20,
-    width: 20,
+    height: 18,
+    width: 18,
     backgroundColor: colors.secondary,
     borderRadius: 18,
     position: 'absolute',

@@ -4,6 +4,7 @@ import CryptoScreen from './CryptoScreen';
 import InvestmentScreen from './InvestmentScreen';
 import ExampleIconScreen from './ExampleIcon';
 import DetailArticleScreen from './DetailArticleScreen';
+import SearchScreen from './SearchScreen';
 
 export {
   HomeScreen,
@@ -12,4 +13,5 @@ export {
   InvestmentScreen,
   ExampleIconScreen,
   DetailArticleScreen,
+  SearchScreen,
 };
