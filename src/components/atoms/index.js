@@ -9,6 +9,7 @@ import CardNews from './CardNews';
 import CardBlockChain from './CardBlockChain';
 import LabelCategory from './LabelCategory';
 import Header from './Header';
+import SelectLanguage from './SelectLanguage';
 
 export {
   SearchBox,
@@ -22,4 +23,5 @@ export {
   CardBlockChain,
   LabelCategory,
   Header,
+  SelectLanguage,
 };

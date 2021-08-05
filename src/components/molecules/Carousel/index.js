@@ -10,22 +10,20 @@ const Carousel = () => {
   const [index, setIndex] = React.useState(0);
 
   return (
-    <>
-      <CustomCarousel
-        layout="default"
-        ref={isCarousel}
-        data={data}
-        renderItem={CarouselCardPrimary}
-        sliderWidth={SLIDER_WIDTH}
-        itemWidth={ITEM_WIDTH}
-        useScrollView={true}
-        enableMomentum={true}
-        loop={true}
-        enableSnap={true}
-        autoplay={true}
-        lockScrollWhileSnapping={true}
-      />
-    </>
+    <CustomCarousel
+      layout="default"
+      ref={isCarousel}
+      data={data}
+      renderItem={CarouselCardPrimary}
+      sliderWidth={SLIDER_WIDTH}
+      itemWidth={ITEM_WIDTH}
+      useScrollView={true}
+      enableMomentum={true}
+      loop={true}
+      enableSnap={true}
+      autoplay={true}
+      lockScrollWhileSnapping={true}
+    />
   );
 };
 

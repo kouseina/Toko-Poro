@@ -8,7 +8,7 @@ const Title = ({text}) => {
   const theme = useTheme();
 
   return (
-    <>
+    <View style={styles.container}>
       <Layout style={styles.wrapper}>
         <View style={styles.wrapperIcon}>
           <View style={styles.iconSecond} />
@@ -21,9 +21,8 @@ const Title = ({text}) => {
           {text}
         </Text>
       </Layout>
-      <Gap height={10} />
       <Divider />
-    </>
+    </View>
   );
 };
 
@@ -46,6 +45,7 @@ const styles = StyleSheet.create({
   wrapper: {
     flexDirection: 'row',
     alignItems: 'center',
+    paddingBottom: 10,
   },
   wrapperIcon: {
     position: 'relative',
@@ -59,5 +59,8 @@ const styles = StyleSheet.create({
     borderColor: 'white',
     borderWidth: 2,
     right: -7,
+  },
+  container: {
+    marginBottom: 20,
   },
 });

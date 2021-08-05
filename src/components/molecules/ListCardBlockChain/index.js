@@ -1,9 +1,11 @@
+import {useNavigation} from '@react-navigation/native';
 import {Layout, Text} from '@ui-kitten/components';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {CardBlockChain, Gap} from '../../atoms';
 
 const ListCardBlockChain = () => {
+  const navigation = useNavigation();
   return (
     <Layout style={styles.container}>
       {data.map((news, index) => (
@@ -12,7 +14,7 @@ const ListCardBlockChain = () => {
             key={index}
             image={news.imgUrl}
             title={news.title}
-            onPress={() => alert('news: ', index)}
+            onPress={() => navigation.navigate('DetailArticle')}
             category={news.category}
           />
           <Gap height={30} />

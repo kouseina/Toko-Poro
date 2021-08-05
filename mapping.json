@@ -1,14 +1,14 @@
 {
-    "components": {
-        "Card": {
-          "appearances": {
-            "outline": {
-              "mapping": {
-                "bodyPaddingHorizontal": -16,
-                "bodyPaddingVertical": -16
-              }
-            }
+  "components": {
+    "Card": {
+      "appearances": {
+        "outline": {
+          "mapping": {
+            "bodyPaddingHorizontal": -16,
+            "bodyPaddingVertical": -16
           }
         }
+      }
     }
+  }
 }

@@ -8,10 +8,11 @@ export default StyleSheet.create({
   searchBox: {
     height: 50,
     marginBottom: 15,
+    flex: 1,
+    marginRight: 7,
   },
   wrapper: {
     flexDirection: 'row',
-    alignItems: 'center',
   },
   flexWrap: {
     flexWrap: 'wrap',
