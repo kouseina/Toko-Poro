@@ -2,10 +2,18 @@ import {useNavigation} from '@react-navigation/native';
 import {Text} from '@ui-kitten/components';
 import React from 'react';
 import {StyleSheet, View, ScrollView} from 'react-native';
-import {ContentWrapper, Header, ListCardNewsWithDesc} from '../../components';
+import {
+  ContentWrapper,
+  Header,
+  ListCardNewsWithDesc,
+  Loading,
+} from '../../components';
 
 const SearchScreen = () => {
   const navigation = useNavigation();
+
+  const [news, setNews] = React.useState([]);
+
   React.useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       // The screen is focused
@@ -20,7 +28,7 @@ const SearchScreen = () => {
     <ContentWrapper>
       <Header autoFocus={true} />
       <ScrollView showsVerticalScrollIndicator={false}>
-        <ListCardNewsWithDesc />
+        {news.length > 0 ? <ListCardNewsWithDesc data={news} /> : <></>}
       </ScrollView>
     </ContentWrapper>
   );

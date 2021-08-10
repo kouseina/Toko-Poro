@@ -3,19 +3,22 @@ import {Layout, Text} from '@ui-kitten/components';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {CardNews, Gap} from '../../atoms';
+import {API_URL} from '@env';
 
-const ListCardNews = () => {
+const ListCardNews = ({data}) => {
   const navigation = useNavigation();
   return (
     <Layout style={styles.container}>
       {data.map((news, index) => (
         <View style={styles.wrapperCard}>
           <CardNews
-            key={index}
-            image={news.imgUrl}
+            key={news.posts_id}
+            image={`${API_URL}/${news.picture}`}
             title={news.title}
-            category={news.category}
-            onPress={() => navigation.navigate('DetailArticle')}
+            tags={news.tags}
+            onPress={() =>
+              navigation.navigate('DetailArticle', {newsId: news.posts_id})
+            }
           />
         </View>
       ))}
@@ -37,38 +40,38 @@ const styles = StyleSheet.create({
   },
 });
 
-const data = [
-  {
-    title: 'Mengenal Istilah Yield Farming dan Crypto Staking',
-    imgUrl: 'https://fintexnews.com/wp-content/uploads/2021/06/farming.png',
-    date: '30 JUNI 2021',
-    category: ['investment'],
-  },
-  {
-    title: 'DEX yang Lagi Naik Daun, Apa Itu Uniswap dan Pancakeswap?',
-    imgUrl: 'https://fintexnews.com/wp-content/uploads/2021/06/DEX-890x450.png',
-    date: '30 JUNI 2021',
-    category: ['binance', 'ethereum'],
-  },
-  {
-    title:
-      'Wow! Bitcoin Mulai Goyah, Dominasinya di Pasar Crypto Tergerus Ether',
-    imgUrl: 'https://fintexnews.com/wp-content/uploads/2021/07/tko-890x450.png',
-    date: '30 JUNI 2021',
-    category: ['cryptocurrency', 'ethereum'],
-  },
-  {
-    title:
-      'Keren! Teknologi Blockchain Jadi Solusi Keruwetan Rantai Distribusi Vaksin Covid-19',
-    imgUrl:
-      'https://fintexnews.com/wp-content/uploads/2021/07/vaksin-890x450.png',
-    date: '30 JUNI 2021',
-    category: ['blockchain'],
-  },
-  {
-    title: 'Kenapa Non Fungible Token atau NFT itu Dibilang Unik?',
-    imgUrl: 'https://fintexnews.com/wp-content/uploads/2021/06/NFT-890x450.png',
-    date: '30 JUNI 2021',
-    category: ['blockchain'],
-  },
-];
+// const data = [
+//   {
+//     title: 'Mengenal Istilah Yield Farming dan Crypto Staking',
+//     imgUrl: 'https://fintexnews.com/wp-content/uploads/2021/06/farming.png',
+//     date: '30 JUNI 2021',
+//     category: ['investment'],
+//   },
+//   {
+//     title: 'DEX yang Lagi Naik Daun, Apa Itu Uniswap dan Pancakeswap?',
+//     imgUrl: 'https://fintexnews.com/wp-content/uploads/2021/06/DEX-890x450.png',
+//     date: '30 JUNI 2021',
+//     category: ['binance', 'ethereum'],
+//   },
+//   {
+//     title:
+//       'Wow! Bitcoin Mulai Goyah, Dominasinya di Pasar Crypto Tergerus Ether',
+//     imgUrl: 'https://fintexnews.com/wp-content/uploads/2021/07/tko-890x450.png',
+//     date: '30 JUNI 2021',
+//     category: ['cryptocurrency', 'ethereum'],
+//   },
+//   {
+//     title:
+//       'Keren! Teknologi Blockchain Jadi Solusi Keruwetan Rantai Distribusi Vaksin Covid-19',
+//     imgUrl:
+//       'https://fintexnews.com/wp-content/uploads/2021/07/vaksin-890x450.png',
+//     date: '30 JUNI 2021',
+//     category: ['blockchain'],
+//   },
+//   {
+//     title: 'Kenapa Non Fungible Token atau NFT itu Dibilang Unik?',
+//     imgUrl: 'https://fintexnews.com/wp-content/uploads/2021/06/NFT-890x450.png',
+//     date: '30 JUNI 2021',
+//     category: ['blockchain'],
+//   },
+// ];

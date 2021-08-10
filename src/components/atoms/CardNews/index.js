@@ -1,10 +1,22 @@
 import React from 'react';
 import {Card, Layout, Text} from '@ui-kitten/components';
-import {StyleSheet, View, Image, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Image,
+  TouchableOpacity,
+  Dimensions,
+} from 'react-native';
 import LabelCategory from '../LabelCategory';
 import Gap from '../Gap';
 
-const CardNews = ({image, title, onPress, desc, category, key}) => {
+const CardNews = ({image, title, onPress, desc, tags, key}) => {
+  let strippedDescHtml;
+
+  if (desc) {
+    strippedDescHtml = desc.replace(/(<([^>]+)>)/gi, '');
+  }
+
   return (
     <Layout style={styles.container} key={key}>
       <Card style={styles.card}>
@@ -16,13 +28,15 @@ const CardNews = ({image, title, onPress, desc, category, key}) => {
               }}
               style={styles.image}
             />
-            {category && (
-              <View style={styles.wrapperCategory}>
-                {category.map((cat, index) => (
-                  <LabelCategory text={cat} key={index} />
-                ))}
-              </View>
-            )}
+            <View style={styles.wrapperCategory}>
+              {tags.map((tag, index) => (
+                <LabelCategory
+                  text={tag.name}
+                  key={tag.tags_id}
+                  onPress={() => alert('hi')}
+                />
+              ))}
+            </View>
           </View>
           <Text style={styles.title} numberOfLines={3}>
             {title}
@@ -31,8 +45,13 @@ const CardNews = ({image, title, onPress, desc, category, key}) => {
             <>
               <Gap height={2} />
               <Text style={styles.desc} category="c1" numberOfLines={4}>
-                {desc}
+                {strippedDescHtml}
               </Text>
+              {/* <RenderHTML
+                source={{html: desc}}
+                contentWidth={width}
+                defaultTextProps={{numberOfLines: 3}}
+              /> */}
             </>
           )}
         </TouchableOpacity>

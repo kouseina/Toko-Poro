@@ -2,10 +2,8 @@ import {Icon, IndexPath, Select, SelectItem} from '@ui-kitten/components';
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
-const SelectLanguage = () => {
-  const data = ['ID', 'ENG'];
-
-  const [selectedIndex, setSelectedIndex] = React.useState(new IndexPath(0));
+const SelectLanguage = ({selectedIndex, onSelect}) => {
+  const data = ['ENG', 'ID'];
 
   const GlobeIcon = props => <Icon {...props} name="globe" />;
 
@@ -22,7 +20,8 @@ const SelectLanguage = () => {
         placeholder="Default"
         value={displayValue}
         selectedIndex={selectedIndex}
-        onSelect={index => setSelectedIndex(index)}>
+        status="warning"
+        onSelect={onSelect}>
         {data.map(renderOption)}
       </Select>
     </View>

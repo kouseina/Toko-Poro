@@ -5,7 +5,7 @@ import {StyleSheet} from 'react-native';
 const Index = () => {
   return (
     <Layout style={styles.container}>
-      <Spinner status="info" />
+      <Spinner status="warning" />
     </Layout>
   );
 };
@@ -14,6 +14,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
+    height: '100%',
+    justifyContent: 'center',
   },
 });
 
