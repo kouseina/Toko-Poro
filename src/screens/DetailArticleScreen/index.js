@@ -15,7 +15,9 @@ import {
   Gap,
   Header,
   LabelCategory,
+  ListCardNewsWithDesc,
   Loading,
+  Title,
 } from '../../components';
 import {colors, getData} from '../../utils';
 import {API_URL} from '@env';
@@ -33,32 +35,71 @@ const DetailArticleScreen = () => {
   const width = Dimensions.get('window').width - 50;
 
   const [loading, setLoading] = React.useState(false);
-  const [news, setNews] = React.useState(false);
+  const [newsLikeId, setNewsLikeId] = React.useState(0);
+  const [news, setNews] = React.useState({});
+  const [newsLike, setNewsLike] = React.useState([]);
+  const [newsTags, setNewsTags] = React.useState([]);
 
   React.useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', () => {
-      setLoading(true);
+    setLoading(true);
+    getData('language').then(language => {
+      axios
+        .get(
+          `${API_URL}/api/post/${
+            newsLikeId ? newsLikeId : route.params.newsId
+          }`,
+        )
+        .then(resNews => {
+          // if use english language
+          if (language === 'ENG') {
+            setNews(resNews.data.data.english);
+            setNewsTags(resNews.data.data.english.tags);
+          }
+          // if use indonesia language
+          else if (language === 'ID') {
+            setNews(resNews.data.data.indonesia);
+            setNewsTags(resNews.data.data.indonesia.tags);
+          }
+        })
+        .catch(e => console.log('Error resNews: ', e))
+        .finally(() => setLoading(false));
+    });
+  }, [newsLikeId]);
+
+  React.useEffect(() => {
+    if (newsTags.length > 0) {
       getData('language').then(language => {
         axios
-          .get(`${API_URL}/api/post/${route.params.newsId}`)
-          .then(resNews => {
-            // if use english language
+          .get(`${API_URL}/api/post/tag/${newsTags[0].tags_id}`)
+          .then(resNewsLike => {
             if (language === 'ENG') {
-              setNews(resNews.data.data.english);
+              setNewsLike(resNewsLike.data.data.english);
             }
             // if use indonesia language
             else if (language === 'ID') {
-              setNews(resNews.data.data.indonesia);
+              setNewsLike(resNewsLike.data.data.indonesia);
             }
           })
-          .catch(e => console.log(e))
-          .finally(() => setLoading(false));
+          .catch(e => console.log('Error resNewsLike: ', e));
       });
-    });
+    }
+  }, [newsTags]);
 
-    // Return the function to unsubscribe from the event so it gets removed on unmount
-    return unsubscribe;
-  }, [navigation]);
+  React.useEffect(() => {
+    if (newsLike.length > 0) {
+      const filteredNewsLike = newsLike.filter(childNewsLike => {
+        return childNewsLike.posts_id !== news.posts_id;
+      });
+
+      if (newsLike.length !== filteredNewsLike.length) {
+        setNewsLike(filteredNewsLike);
+        console.log('not clear news: ', newsLike);
+        console.log('not clear filtered news: ', filteredNewsLike);
+      } else {
+        console.log('clear');
+      }
+    }
+  }, [newsLike]);
 
   return (
     <ContentWrapper>
@@ -99,15 +140,10 @@ const DetailArticleScreen = () => {
             </View>
             <Gap height={25} />
             <View style={[styles.wrapper, styles.flexWrap]}>
-              {news.length > 0 ? (
-                news.tags.map(tag => {
-                  <LabelCategory text={tag.name} key={tag.tags_id} />;
-                })
-              ) : (
-                <View style={{height: 15}}>
-                  <Loading />
-                </View>
-              )}
+              {newsTags.length > 0 &&
+                newsTags.map((tag, index) => (
+                  <LabelCategory text={tag.name} key={tag.tags_id} />
+                ))}
             </View>
             <Gap height={8} />
             <Image
@@ -127,6 +163,14 @@ const DetailArticleScreen = () => {
               <Text category="p2">{news.views}</Text>
             </View>
             <RenderHTML source={{html: news.content}} contentWidth={width} />
+
+            <Title text="You May Also Like" />
+            {newsLike.length > 0 && (
+              <ListCardNewsWithDesc
+                data={newsLike}
+                setNewsLikeId={setNewsLikeId}
+              />
+            )}
           </>
         )}
       </ScrollView>

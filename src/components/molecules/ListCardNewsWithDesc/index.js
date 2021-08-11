@@ -5,7 +5,7 @@ import {CardNews, Gap} from '../../atoms';
 import {API_URL} from '@env';
 import {useNavigation} from '@react-navigation/native';
 
-const ListCardNewsWithDesc = ({data}) => {
+const ListCardNewsWithDesc = ({data, setNewsLikeId}) => {
   const navigation = useNavigation();
   return (
     <Layout style={styles.container}>
@@ -17,9 +17,13 @@ const ListCardNewsWithDesc = ({data}) => {
             title={news.title}
             desc={news.content}
             tags={news.tags}
-            onPress={() =>
-              navigation.navigate('DetailArticle', {newsId: news.posts_id})
-            }
+            onPress={() => {
+              if (setNewsLikeId) {
+                setNewsLikeId(news.posts_id);
+              } else {
+                navigation.navigate('DetailArticle', {newsId: news.posts_id});
+              }
+            }}
           />
           <Gap height={15} />
         </>
