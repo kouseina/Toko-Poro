@@ -9,9 +9,11 @@ import {
 } from 'react-native';
 import LabelCategory from '../LabelCategory';
 import Gap from '../Gap';
+import {useNavigation} from '@react-navigation/native';
 
 const CardNews = ({image, title, onPress, desc, tags, key}) => {
   let strippedDescHtml;
+  const navigation = useNavigation();
 
   if (desc) {
     strippedDescHtml = desc.replace(/(<([^>]+)>)/gi, '');
@@ -33,7 +35,12 @@ const CardNews = ({image, title, onPress, desc, tags, key}) => {
                 <LabelCategory
                   text={tag.name}
                   key={tag.tags_id}
-                  onPress={() => alert('hi')}
+                  onPress={() =>
+                    navigation.navigate('Search', {
+                      tagsId: tag.tags_id,
+                      tagsName: tag.name,
+                    })
+                  }
                 />
               ))}
             </View>

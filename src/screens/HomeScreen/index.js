@@ -133,7 +133,11 @@ const Home = () => {
             <Thumbnail url="https://www.youtube.com/watch?v=9vm2CNHw3co" />
             <Gap height={20} />
             <Title text="trending news" />
-            {news.length > 0 ? <ListCardNews data={news} /> : <Loading />}
+            {trendNews.length > 0 ? (
+              <ListCardNews data={trendNews} />
+            ) : (
+              <Loading />
+            )}
             <Title text="latest news" />
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               <View style={[styles.wrapper, styles.flexWrap]}>
@@ -146,8 +150,8 @@ const Home = () => {
                 ))}
               </View>
             </ScrollView>
-            {trendNews.length > 0 ? (
-              <ListCardNewsWithDesc data={trendNews} />
+            {news.length > 0 ? (
+              <ListCardNewsWithDesc data={news} />
             ) : (
               <Loading />
             )}

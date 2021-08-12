@@ -35,7 +35,6 @@ const DetailArticleScreen = () => {
   const width = Dimensions.get('window').width - 50;
 
   const [loading, setLoading] = React.useState(false);
-  const [newsLikeId, setNewsLikeId] = React.useState(0);
   const [news, setNews] = React.useState({});
   const [newsLike, setNewsLike] = React.useState([]);
   const [newsTags, setNewsTags] = React.useState([]);
@@ -44,11 +43,7 @@ const DetailArticleScreen = () => {
     setLoading(true);
     getData('language').then(language => {
       axios
-        .get(
-          `${API_URL}/api/post/${
-            newsLikeId ? newsLikeId : route.params.newsId
-          }`,
-        )
+        .get(`${API_URL}/api/post/${route.params.newsId}`)
         .then(resNews => {
           // if use english language
           if (language === 'ENG') {
@@ -64,7 +59,7 @@ const DetailArticleScreen = () => {
         .catch(e => console.log('Error resNews: ', e))
         .finally(() => setLoading(false));
     });
-  }, [newsLikeId]);
+  }, [route]);
 
   React.useEffect(() => {
     if (newsTags.length > 0) {
@@ -93,8 +88,8 @@ const DetailArticleScreen = () => {
 
       if (newsLike.length !== filteredNewsLike.length) {
         setNewsLike(filteredNewsLike);
-        console.log('not clear news: ', newsLike);
-        console.log('not clear filtered news: ', filteredNewsLike);
+        // console.log('not clear news: ', newsLike);
+        // console.log('not clear filtered news: ', filteredNewsLike);
       } else {
         console.log('clear');
       }
@@ -108,7 +103,15 @@ const DetailArticleScreen = () => {
           <Loading />
         ) : (
           <>
-            <Header />
+            <TouchableOpacity
+              onPress={() => navigation.goBack()}
+              style={styles.header}>
+              <Icon
+                name="arrow-back-outline"
+                fill={colors.primary}
+                style={{width: 24, height: 24}}
+              />
+            </TouchableOpacity>
             <Text style={styles.title} category="h6">
               {news.title}
             </Text>
@@ -142,7 +145,16 @@ const DetailArticleScreen = () => {
             <View style={[styles.wrapper, styles.flexWrap]}>
               {newsTags.length > 0 &&
                 newsTags.map((tag, index) => (
-                  <LabelCategory text={tag.name} key={tag.tags_id} />
+                  <LabelCategory
+                    text={tag.name}
+                    key={tag.tags_id}
+                    onPress={() =>
+                      navigation.navigate('Search', {
+                        tagsId: tag.tags_id,
+                        tagsName: tag.name,
+                      })
+                    }
+                  />
                 ))}
             </View>
             <Gap height={8} />
@@ -165,12 +177,7 @@ const DetailArticleScreen = () => {
             <RenderHTML source={{html: news.content}} contentWidth={width} />
 
             <Title text="You May Also Like" />
-            {newsLike.length > 0 && (
-              <ListCardNewsWithDesc
-                data={newsLike}
-                setNewsLikeId={setNewsLikeId}
-              />
-            )}
+            {newsLike.length > 0 && <ListCardNewsWithDesc data={newsLike} />}
           </>
         )}
       </ScrollView>

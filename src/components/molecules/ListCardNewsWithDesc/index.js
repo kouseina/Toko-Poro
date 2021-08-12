@@ -18,11 +18,7 @@ const ListCardNewsWithDesc = ({data, setNewsLikeId}) => {
             desc={news.content}
             tags={news.tags}
             onPress={() => {
-              if (setNewsLikeId) {
-                setNewsLikeId(news.posts_id);
-              } else {
-                navigation.navigate('DetailArticle', {newsId: news.posts_id});
-              }
+              navigation.navigate('DetailArticle', {newsId: news.posts_id});
             }}
           />
           <Gap height={15} />

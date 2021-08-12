@@ -28,4 +28,5 @@ export default StyleSheet.create({
   flexWrap: {
     flexWrap: 'wrap',
   },
+  header: {marginBottom: 20},
 });

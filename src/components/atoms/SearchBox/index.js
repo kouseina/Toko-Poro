@@ -3,7 +3,13 @@ import {StyleSheet, TouchableOpacity} from 'react-native';
 import {Icon, Input} from '@ui-kitten/components';
 import {colors} from '../../../utils';
 
-const Index = ({value, onChangeText, onPressIn, autoFocus}) => {
+const Index = ({
+  value,
+  onChangeText,
+  onPressIn,
+  autoFocus,
+  onSubmitEditing,
+}) => {
   const RenderIconSearch = props => (
     <TouchableOpacity onPress={() => alert('hi')}>
       <Icon
@@ -25,7 +31,7 @@ const Index = ({value, onChangeText, onPressIn, autoFocus}) => {
         size="large"
         status="warning"
         style={styles.search}
-        onSubmitEditing={() => alert('onKey')}
+        onSubmitEditing={onSubmitEditing}
         onPressIn={onPressIn}
         autoFocus={autoFocus}
       />
