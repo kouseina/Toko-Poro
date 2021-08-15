@@ -16,6 +16,7 @@ import {
   Loading,
   SearchBox,
   SelectLanguage,
+  ThumbnailVideo,
   Title,
 } from '../../components';
 import {API_URL} from '@env';
@@ -39,6 +40,7 @@ const Home = () => {
   const [news, setNews] = React.useState([]);
   const [trendNews, setTrendNews] = React.useState([]);
   const [tags, setTags] = React.useState([]);
+  const [videos, setVideos] = React.useState([]);
 
   React.useEffect(() => {
     setLoading(true);
@@ -52,7 +54,7 @@ const Home = () => {
     });
   }, []);
 
-  React.useEffect(() => {
+  const getAllApi = () => {
     setLoading(true);
     getData('language').then(language => {
       axios
@@ -64,42 +66,42 @@ const Home = () => {
               axios
                 .get(`${API_URL}/api/tag`)
                 .then(resTag => {
-                  // if use english language
-                  if (language === 'ENG') {
-                    setNews(resNews.data.data.english);
-                    setTrendNews(resTrendNews.data.data.english);
-                    setTags(resTag.data.data.english);
-                  }
-                  // if use indonesia language
-                  else if (language === 'ID') {
-                    setNews(resNews.data.data.indonesia);
-                    setTrendNews(resTrendNews.data.data.indonesia);
-                    setTags(resTag.data.data.indonesia);
-                  }
+                  axios
+                    .get(`${API_URL}/api/video`)
+                    .then(resVideos => {
+                      // if use indonesia language
+                      if (language === 'ID') {
+                        setNews(resNews.data.data.indonesia);
+                        setTrendNews(resTrendNews.data.data.indonesia);
+                        setTags(resTag.data.data.indonesia);
+                        setVideos(resVideos.data.data.indonesia);
+                      }
+                      // if use english language
+                      else {
+                        setNews(resNews.data.data.english);
+                        setTrendNews(resTrendNews.data.data.english);
+                        setTags(resTag.data.data.english);
+                        setVideos(resVideos.data.data.english);
+                      }
+                    })
+                    .catch(e => console.log('Error video: ', e))
+                    .finally(() => setLoading(false));
                 })
                 .catch(e => console.log('Error tag: ', e));
             })
             .catch(e => console.log('Error trend news: ', e));
         })
-        .catch(e => console.log('Error news: ', e))
-        .finally(() => setLoading(false));
+        .catch(e => console.log('Error news: ', e));
     });
+  };
+
+  React.useEffect(() => {
+    getAllApi();
   }, [selectedIndexLang]);
 
   const onRefresh = React.useCallback(() => {
-    setRefreshing(true);
-    setLoading(true);
-    axios
-      .get(`${API_URL}/api/post`)
-      .then(resNews => {
-        if (selectedIndexLang.row === 0) {
-          setNews(resNews.data.data.english);
-        } else if (selectedIndexLang.row === 1) {
-          setNews(resNews.data.data.indonesia);
-        }
-      })
-      .catch(e => console.log(e))
-      .finally(() => setLoading(false), setRefreshing(false));
+    setRefreshing(loading);
+    getAllApi();
   }, []);
 
   const setLanguage = index => {
@@ -127,10 +129,10 @@ const Home = () => {
           <Loading />
         ) : (
           <>
-            <Carousel />
+            {trendNews.length > 0 ? <Carousel data={trendNews} /> : <Loading />}
             <Gap height={20} />
             <Title text="latest videos" />
-            <Thumbnail url="https://www.youtube.com/watch?v=9vm2CNHw3co" />
+            {videos.length > 0 ? <ThumbnailVideo data={videos} /> : <Loading />}
             <Gap height={20} />
             <Title text="trending news" />
             {trendNews.length > 0 ? (
@@ -145,7 +147,12 @@ const Home = () => {
                   <LabelCategory
                     key={tag.tags_id}
                     text={tag.name}
-                    onPress={() => alert('hii')}
+                    onPress={() =>
+                      navigation.navigate('Search', {
+                        tagsId: tag.tags_id,
+                        tagsName: tag.name,
+                      })
+                    }
                   />
                 ))}
               </View>

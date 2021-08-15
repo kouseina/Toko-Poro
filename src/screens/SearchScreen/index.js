@@ -28,13 +28,23 @@ const SearchScreen = () => {
         axios
           .get(`${API_URL}/api/post/tag/${route.params.tagsId}`)
           .then(resNewsTags => {
-            // if use english language
-            if (language === 'ENG') {
-              setNews(resNewsTags.data.data.english);
-            }
-            // if use indonesia language
-            else if (language === 'ID') {
-              setNews(resNewsTags.data.data.indonesia);
+            if (Object.keys(resNewsTags.data.data).length > 0) {
+              if (resNewsTags.data.data) {
+                // if use english language
+                if (language === 'ENG') {
+                  setNews(resNewsTags.data.data.english);
+                }
+                // if use indonesia language
+                else if (language === 'ID') {
+                  setNews(resNewsTags.data.data.indonesia);
+                }
+              }
+            } else {
+              console.log('clear');
+              setNews([]);
+              setEmpty(
+                `Tidak ada artikel dengan tag: ${route.params.tagsName}`,
+              );
             }
           })
           .catch(e => console.log('Error news by tags: ', e))
@@ -69,7 +79,7 @@ const SearchScreen = () => {
           } else {
             console.log('clear');
             setNews([]);
-            setEmpty(search);
+            setEmpty(`Tidak ada artikel dengan keyword: ${search}`);
           }
         });
       })
@@ -92,7 +102,7 @@ const SearchScreen = () => {
             <ListCardNewsWithDesc data={news} />
           ) : empty !== '' ? (
             <View style={{flex: 1}}>
-              <Text>Tidak ada artikel dengan keyword: {empty}</Text>
+              <Text>{empty}</Text>
             </View>
           ) : (
             <></>

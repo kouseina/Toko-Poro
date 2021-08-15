@@ -12,18 +12,18 @@ const TabItem = ({title, active, onPress, onLongPress}) => {
         <Icon name="home-outline" fill={colors.secondary} style={styles.icon} />
       );
     }
-    if (title === 'Trends') {
+    if (title === 'Video') {
       return active ? (
-        <Icon name="star" fill={colors.primary} style={styles.icon} />
+        <Icon name="film" fill={colors.primary} style={styles.icon} />
       ) : (
-        <Icon name="star-outline" fill={colors.secondary} style={styles.icon} />
+        <Icon name="film-outline" fill={colors.secondary} style={styles.icon} />
       );
     }
-    if (title === 'Crypto') {
+    if (title === 'About') {
       return active ? (
-        <Icon name="bar-chart" fill={colors.primary} style={styles.icon} />
+        <Icon name="info" fill={colors.primary} style={styles.icon} />
       ) : (
-        <Icon name="bar-chart" fill={colors.secondary} style={styles.icon} />
+        <Icon name="info-outline" fill={colors.secondary} style={styles.icon} />
       );
     }
     if (title === 'Investment') {

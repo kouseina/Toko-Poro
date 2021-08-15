@@ -9,33 +9,59 @@ import {
 } from 'react-native';
 import Gap from '../Gap';
 import LabelCategory from '../LabelCategory';
+import {API_URL} from '@env';
 
 export const SLIDER_WIDTH = Dimensions.get('window').width - 50;
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 1);
 
-const CarouselCardPrimary = ({item, index, onPress}) => {
+const CarouselCardPrimary = ({item, index}) => {
+  const monthNames = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'June',
+    'July',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+  ];
+  const d = new Date(item.date);
+
   return (
-    <Layout style={styles.container} key={index}>
+    <Layout style={styles.container} key={item.posts_id}>
       <ImageBackground
-        source={{uri: item.imgUrl}}
+        source={{uri: `${API_URL}/${item.picture}`}}
         resizeMode="cover"
         style={styles.image}>
         <Layout style={styles.innerContainer}>
-          {item.category && (
-            <View style={styles.wrapperCategory}>
-              {item.category.map((cat, index) => (
-                <LabelCategory text={cat} key={index} />
-              ))}
-            </View>
-          )}
-          <TouchableOpacity onPress={onPress}>
+          <View style={styles.wrapperCategory}>
+            {item.tags.map((tag, index) => (
+              <LabelCategory
+                text={tag.name}
+                key={tag.tags_id}
+                onPress={() =>
+                  navigation.navigate('Search', {
+                    tagsId: tag.tags_id,
+                    tagsName: tag.name,
+                  })
+                }
+              />
+            ))}
+          </View>
+          <TouchableOpacity onPress={() => alert('hi')}>
             <View style={styles.wrapper}>
               <Text style={styles.subHeader}>- BY FINTEX</Text>
               <Gap width={20} />
               <View style={styles.wrapper}>
                 <Icon name="calendar" style={styles.icon} fill="white" />
                 <Gap width={5} />
-                <Text style={styles.subHeader}>{item.date}</Text>
+                <Text style={styles.subHeader}>{`${d.getDate()} ${
+                  monthNames[d.getMonth()]
+                }, ${d.getFullYear()}`}</Text>
               </View>
             </View>
             <Text style={styles.header} numberOfLines={2}>
@@ -47,6 +73,9 @@ const CarouselCardPrimary = ({item, index, onPress}) => {
     </Layout>
   );
 };
+
+export default CarouselCardPrimary;
+
 const styles = StyleSheet.create({
   container: {
     width: ITEM_WIDTH,
@@ -95,5 +124,3 @@ const styles = StyleSheet.create({
     left: 20,
   },
 });
-
-export default CarouselCardPrimary;

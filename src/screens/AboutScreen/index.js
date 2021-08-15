@@ -4,12 +4,12 @@ import {SafeAreaView, Text} from 'react-native';
 // style
 import styles from './style';
 
-const Crypto = () => {
+const About = () => {
   return (
     <SafeAreaView>
-      <Text>Crypto Screen</Text>
+      <Text>About Screen</Text>
     </SafeAreaView>
   );
 };
 
-export default Crypto;
+export default About;

@@ -1,6 +1,6 @@
 import HomeScreen from './HomeScreen';
-import TrendsScreen from './TrendsScreen';
-import CryptoScreen from './CryptoScreen';
+import VideoScreen from './VideoScreen';
+import AboutScreen from './AboutScreen';
 import InvestmentScreen from './InvestmentScreen';
 import ExampleIconScreen from './ExampleIcon';
 import DetailArticleScreen from './DetailArticleScreen';
@@ -8,8 +8,8 @@ import SearchScreen from './SearchScreen';
 
 export {
   HomeScreen,
-  TrendsScreen,
-  CryptoScreen,
+  VideoScreen,
+  AboutScreen,
   InvestmentScreen,
   ExampleIconScreen,
   DetailArticleScreen,

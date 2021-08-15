@@ -2,12 +2,12 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
-  CryptoScreen,
+  AboutScreen,
   DetailArticleScreen,
   HomeScreen,
   InvestmentScreen,
   SearchScreen,
-  TrendsScreen,
+  VideoScreen,
 } from '../screens';
 import {BottomNavigator} from '../components';
 
@@ -18,8 +18,8 @@ const MainApp = () => {
   return (
     <Tab.Navigator tabBar={props => <BottomNavigator {...props} />}>
       <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Trends" component={TrendsScreen} />
-      <Tab.Screen name="Crypto" component={CryptoScreen} />
+      <Tab.Screen name="Video" component={VideoScreen} />
+      <Tab.Screen name="About" component={AboutScreen} />
       <Tab.Screen name="Investment" component={InvestmentScreen} />
     </Tab.Navigator>
   );

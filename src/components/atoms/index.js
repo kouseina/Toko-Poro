@@ -10,6 +10,7 @@ import CardBlockChain from './CardBlockChain';
 import LabelCategory from './LabelCategory';
 import Header from './Header';
 import SelectLanguage from './SelectLanguage';
+import ThumbnailVideo from './ThumbnailVideo';
 
 export {
   SearchBox,
@@ -24,4 +25,5 @@ export {
   LabelCategory,
   Header,
   SelectLanguage,
+  ThumbnailVideo,
 };
