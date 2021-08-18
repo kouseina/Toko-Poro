@@ -1,7 +1,3 @@
 import {StyleSheet} from 'react-native';
 
-export default StyleSheet.create({
-  page: {
-    padding: 15,
-  },
-});
+export default StyleSheet.create({});

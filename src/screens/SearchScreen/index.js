@@ -12,6 +12,9 @@ import {
 import {API_URL} from '@env';
 import {getData, storeData} from '../../utils';
 
+import styles from './style';
+import {LangIndo} from '../../assets';
+
 const SearchScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
@@ -19,17 +22,20 @@ const SearchScreen = () => {
   const [news, setNews] = React.useState([]);
   const [search, setSearch] = React.useState('');
   const [empty, setEmpty] = React.useState('');
+  const [tagName, setTagName] = React.useState('');
   const [loading, setLoading] = React.useState(false);
+  const [lang, setLang] = React.useState('ENG');
 
-  React.useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', () => {
-      setLoading(true);
+  const getNewsByTag = () => {
+    if (route.params !== undefined && route.params !== undefined) {
       getData('language').then(language => {
+        setLoading(true);
         axios
           .get(`${API_URL}/api/post/tag/${route.params.tagsId}`)
           .then(resNewsTags => {
             if (Object.keys(resNewsTags.data.data).length > 0) {
               if (resNewsTags.data.data) {
+                setTagName(route.params.tagsName);
                 // if use english language
                 if (language === 'ENG') {
                   setNews(resNewsTags.data.data.english);
@@ -43,13 +49,28 @@ const SearchScreen = () => {
               console.log('clear');
               setNews([]);
               setEmpty(
-                `Tidak ada artikel dengan tag: ${route.params.tagsName}`,
+                language === 'ID'
+                  ? `${LangIndo.search.tagEmpty} ${route.params.tagsName}`
+                  : `No articles tagged: ${route.params.tagsName}`,
               );
             }
           })
           .catch(e => console.log('Error news by tags: ', e))
           .finally(() => setLoading(false));
       });
+    }
+  };
+
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      getData('language').then(language => {
+        if (language === 'ID') {
+          setLang('ID');
+        } else {
+          setLang('ENG');
+        }
+      });
+      getNewsByTag();
     });
 
     // Return the function to unsubscribe from the event so it gets removed on unmount
@@ -57,10 +78,12 @@ const SearchScreen = () => {
   }, [navigation]);
 
   React.useEffect(() => {
-    console.log('call tags this screen');
+    getNewsByTag();
   }, [route]);
 
   const onSubmitEditing = () => {
+    setTagName('');
+    setEmpty('');
     setLoading(true);
     axios
       .get(`${API_URL}/api/post?search=${search}`)
@@ -79,7 +102,11 @@ const SearchScreen = () => {
           } else {
             console.log('clear');
             setNews([]);
-            setEmpty(`Tidak ada artikel dengan keyword: ${search}`);
+            setEmpty(
+              language === 'ID'
+                ? `${LangIndo.search.searchEmpty} ${search}`
+                : `There are no articles with the keyword: ${search}`,
+            );
           }
         });
       })
@@ -87,22 +114,22 @@ const SearchScreen = () => {
       .finally(() => setLoading(false));
   };
 
-  console.log('news: ', news);
-
   return (
     <ContentWrapper>
       <Header
-        autoFocus={true}
+        autoFocus={route.params ? false : true}
         onChangeText={value => setSearch(value)}
         onSubmitEditing={onSubmitEditing}
+        placeholder={lang === 'ID' ? LangIndo.search.search : 'Find article...'}
       />
       {!loading ? (
         <ScrollView showsVerticalScrollIndicator={false}>
+          {tagName.length > 0 && <Text style={styles.tag}>Tag: {tagName}</Text>}
           {news.length > 0 ? (
             <ListCardNewsWithDesc data={news} />
           ) : empty !== '' ? (
             <View style={{flex: 1}}>
-              <Text>{empty}</Text>
+              <Text style={styles.tag}>{empty}</Text>
             </View>
           ) : (
             <></>
@@ -116,5 +143,3 @@ const SearchScreen = () => {
 };
 
 export default SearchScreen;
-
-const styles = StyleSheet.create({});

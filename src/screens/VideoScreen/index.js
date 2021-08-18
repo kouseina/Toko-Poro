@@ -7,11 +7,16 @@ import {API_URL} from '@env';
 // style
 import styles from './style';
 import {getData} from '../../utils';
+import {LangIndo} from '../../assets';
+import {useNavigation} from '@react-navigation/native';
 
-const Video = () => {
+const VideoScreen = () => {
   const width = Dimensions.get('window').width - 50;
+  const navigation = useNavigation();
+
   const [videos, setVideos] = React.useState([]);
   const [loading, setLoading] = React.useState([]);
+  const [lang, setLang] = React.useState('ENG');
   const [refreshing, setRefreshing] = React.useState(false);
 
   const getVideo = () => {
@@ -23,24 +28,30 @@ const Video = () => {
           // if use indonesia language
           if (language === 'ID') {
             setVideos(resVideos.data.data.indonesia);
+            setLang('ID');
           }
           // if use english language
           else {
             setVideos(resVideos.data.data.english);
+            setLang('ENG');
           }
         })
         .catch(e => console.log('Error video: ', e))
-        .finally(() => setLoading(false));
+        .finally(() => setLoading(false), setRefreshing(false));
     });
   };
 
   React.useEffect(() => {
-    getVideo();
-  }, []);
+    const unsubscribe = navigation.addListener('focus', () => {
+      getVideo();
+    });
+
+    return unsubscribe;
+  }, [navigation]);
 
   const onRefresh = React.useCallback(() => {
-    setRefreshing(loading);
-    getAllApi();
+    setRefreshing(true);
+    getVideo();
   }, []);
 
   return (
@@ -49,11 +60,13 @@ const Video = () => {
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>
-        <Title text="All video" />
+        <Title
+          text={lang === 'ID' ? LangIndo.video.titleAllVideo : 'All video'}
+        />
         {loading ? <Loading /> : <ListVideo data={videos} />}
       </ScrollView>
     </ContentWrapper>
   );
 };
 
-export default Video;
+export default VideoScreen;

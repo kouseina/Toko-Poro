@@ -5,8 +5,8 @@ import {
   AboutScreen,
   DetailArticleScreen,
   HomeScreen,
-  InvestmentScreen,
   SearchScreen,
+  SplashScreen,
   VideoScreen,
 } from '../screens';
 import {BottomNavigator} from '../components';
@@ -20,14 +20,14 @@ const MainApp = () => {
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Video" component={VideoScreen} />
       <Tab.Screen name="About" component={AboutScreen} />
-      <Tab.Screen name="Investment" component={InvestmentScreen} />
     </Tab.Navigator>
   );
 };
 
 const Router = () => {
   return (
-    <Stack.Navigator initialRouteName="MainApp" headerMode="none">
+    <Stack.Navigator initialRouteName="Splash" headerMode="none">
+      <Stack.Screen name="Splash" component={SplashScreen} />
       <Stack.Screen name="MainApp" component={MainApp} />
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="DetailArticle" component={DetailArticleScreen} />

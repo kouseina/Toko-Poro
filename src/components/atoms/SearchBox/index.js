@@ -9,6 +9,7 @@ const Index = ({
   onPressIn,
   autoFocus,
   onSubmitEditing,
+  placeholder,
 }) => {
   const RenderIconSearch = props => (
     <TouchableOpacity onPress={() => alert('hi')}>
@@ -24,7 +25,7 @@ const Index = ({
   return (
     <>
       <Input
-        placeholder="Find article..."
+        placeholder={placeholder ? placeholder : 'Find article...'}
         value={value}
         onChangeText={onChangeText}
         accessoryLeft={RenderIconSearch}
@@ -34,6 +35,7 @@ const Index = ({
         onSubmitEditing={onSubmitEditing}
         onPressIn={onPressIn}
         autoFocus={autoFocus}
+        onFocus={onPressIn}
       />
     </>
   );

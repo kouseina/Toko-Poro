@@ -5,7 +5,13 @@ import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {SearchBox, Gap} from '..';
 import {colors} from '../../../utils';
 
-const Header = ({autoFocus, onSubmitEditing, onChangeText, onPressIn}) => {
+const Header = ({
+  autoFocus,
+  onSubmitEditing,
+  onChangeText,
+  onPressIn,
+  placeholder,
+}) => {
   const navigation = useNavigation();
   return (
     <>
@@ -24,6 +30,7 @@ const Header = ({autoFocus, onSubmitEditing, onChangeText, onPressIn}) => {
             onSubmitEditing={onSubmitEditing}
             onChangeText={onChangeText}
             onPressIn={onPressIn}
+            placeholder={placeholder}
           />
         </View>
       </View>

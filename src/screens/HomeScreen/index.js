@@ -3,8 +3,6 @@ import {Card, IndexPath} from '@ui-kitten/components';
 import React from 'react';
 import {ScrollView, Dimensions, View, RefreshControl} from 'react-native';
 import WebView from 'react-native-webview';
-import {Thumbnail} from 'react-native-thumbnail-video';
-import Youtube from 'react-native-youtube';
 import {
   Carousel,
   ContentWrapper,
@@ -25,8 +23,9 @@ import {getData, storeData} from '../../utils';
 
 // style
 import styles from './style';
+import {LangIndo} from '../../assets';
 
-const Home = () => {
+const HomeScreen = () => {
   const width = Dimensions.get('window').width - 50;
   const source =
     '<a class="twitter-timeline" href="https://twitter.com/fintexnews?ref_src=twsrc%5Etfw">Tweets by fintexnews</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>';
@@ -37,6 +36,7 @@ const Home = () => {
   const [selectedIndexLang, setSelectedIndexLang] = React.useState(
     new IndexPath(0),
   );
+  const [lang, setLang] = React.useState('ENG');
   const [news, setNews] = React.useState([]);
   const [trendNews, setTrendNews] = React.useState([]);
   const [tags, setTags] = React.useState([]);
@@ -46,10 +46,12 @@ const Home = () => {
     setLoading(true);
     getData('language').then(language => {
       if (language === 'ENG') {
+        setLang('ENG');
         setSelectedIndexLang(new IndexPath(0));
       }
       if (language === 'ID') {
         setSelectedIndexLang(new IndexPath(1));
+        setLang('ID');
       }
     });
   }, []);
@@ -104,20 +106,26 @@ const Home = () => {
     getAllApi();
   }, []);
 
-  const setLanguage = index => {
+  const onSelectLang = index => {
     setSelectedIndexLang(index);
     storeData('language', index.row === 0 ? 'ENG' : 'ID');
+    setLang(index.row === 0 ? 'ENG' : 'ID');
   };
 
   return (
     <ContentWrapper style={styles.page}>
       <View style={styles.wrapper}>
         <View style={styles.searchBox}>
-          <SearchBox onPressIn={() => navigation.navigate('Search')} />
+          <SearchBox
+            placeholder={
+              lang === 'ID' ? LangIndo.home.search : 'Find article...'
+            }
+            onPressIn={() => navigation.navigate('Search')}
+          />
         </View>
         <SelectLanguage
           selectedIndex={selectedIndexLang}
-          onSelect={setLanguage}
+          onSelect={onSelectLang}
         />
       </View>
       <ScrollView
@@ -131,16 +139,24 @@ const Home = () => {
           <>
             {trendNews.length > 0 ? <Carousel data={trendNews} /> : <Loading />}
             <Gap height={20} />
-            <Title text="latest videos" />
+            <Title
+              text={lang === 'ID' ? LangIndo.home.titleVideo : 'latest videos'}
+            />
             {videos.length > 0 ? <ThumbnailVideo data={videos} /> : <Loading />}
             <Gap height={20} />
-            <Title text="trending news" />
+            <Title
+              text={
+                lang === 'ID' ? LangIndo.home.titleNewsTrends : 'trending news'
+              }
+            />
             {trendNews.length > 0 ? (
               <ListCardNews data={trendNews} />
             ) : (
               <Loading />
             )}
-            <Title text="latest news" />
+            <Title
+              text={lang === 'ID' ? LangIndo.home.titleNews : 'latest news'}
+            />
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               <View style={[styles.wrapper, styles.flexWrap]}>
                 {tags.map(tag => (
@@ -151,6 +167,7 @@ const Home = () => {
                       navigation.navigate('Search', {
                         tagsId: tag.tags_id,
                         tagsName: tag.name,
+                        autoFocus: false,
                       })
                     }
                   />
@@ -162,14 +179,14 @@ const Home = () => {
             ) : (
               <Loading />
             )}
-            <Title text="blockchain" />
+            {/* <Title text="blockchain" />
             <ListCardBlockChain />
             <Title text="latest tweets" />
-            {/* <Card>
+            <Card>
               <WebView
                 source={{html: source}}
                 javaScriptEnabled={true}
-                style={{height: 600, width: width}}
+                style={{height: 400, width: width}}
               />
             </Card> */}
           </>
@@ -179,4 +196,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomeScreen;

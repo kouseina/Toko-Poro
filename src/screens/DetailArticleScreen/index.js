@@ -25,6 +25,7 @@ import {API_URL} from '@env';
 import Share from 'react-native-share';
 
 import styles from './style';
+import {LangIndo} from '../../assets';
 
 const DetailArticleScreen = () => {
   const theme = useTheme();
@@ -55,6 +56,7 @@ const DetailArticleScreen = () => {
   const [news, setNews] = React.useState({});
   const [newsLike, setNewsLike] = React.useState([]);
   const [newsTags, setNewsTags] = React.useState([]);
+  const [lang, setLang] = React.useState('ENG');
 
   const getNews = () => {
     setLoading(true);
@@ -66,11 +68,13 @@ const DetailArticleScreen = () => {
           if (language === 'ID') {
             setNews(resNews.data.data.indonesia);
             setNewsTags(resNews.data.data.indonesia.tags);
+            setLang('ID');
           }
           // if use english language
           else {
             setNews(resNews.data.data.english);
             setNewsTags(resNews.data.data.english.tags);
+            setLang('ENG');
           }
         })
         .catch(e => console.log('Error resNews: ', e));
@@ -83,12 +87,13 @@ const DetailArticleScreen = () => {
         axios
           .get(`${API_URL}/api/post/tag/${newsTags[0].tags_id}`)
           .then(resNewsLike => {
-            if (language === 'ENG') {
-              setNewsLike(resNewsLike.data.data.english);
-            }
             // if use indonesia language
-            else if (language === 'ID') {
+            if (language === 'ID') {
               setNewsLike(resNewsLike.data.data.indonesia);
+            }
+            // if use english language
+            else {
+              setNewsLike(resNewsLike.data.data.english);
             }
           })
           .catch(e => console.log('Error resNewsLike: ', e))
@@ -200,6 +205,7 @@ const DetailArticleScreen = () => {
                       navigation.navigate('Search', {
                         tagsId: tag.tags_id,
                         tagsName: tag.name,
+                        autoFocus: false,
                       })
                     }
                   />
@@ -224,7 +230,13 @@ const DetailArticleScreen = () => {
             </View>
             <RenderHTML source={{html: news.content}} contentWidth={width} />
 
-            <Title text="You May Also Like" />
+            <Title
+              text={
+                lang === 'ID'
+                  ? LangIndo.detailNews.titleYouMayAlsoLike
+                  : 'You May Also Like'
+              }
+            />
             {newsLike.length > 0 && (
               <HorizontalCardNewsWithDesc data={newsLike} />
             )}

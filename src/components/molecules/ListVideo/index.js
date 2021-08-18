@@ -34,4 +34,9 @@ const styles = StyleSheet.create({
   wrapperCard: {
     width: '50%',
   },
+  title: {
+    fontWeight: '700',
+
+    marginTop: 10,
+  },
 });

@@ -39,6 +39,7 @@ const CardNews = ({image, title, onPress, desc, tags, key}) => {
                     navigation.navigate('Search', {
                       tagsId: tag.tags_id,
                       tagsName: tag.name,
+                      autoFocus: false,
                     })
                   }
                 />

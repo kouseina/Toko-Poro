@@ -47,6 +47,7 @@ const CarouselCardPrimary = ({item, index}) => {
                   navigation.navigate('Search', {
                     tagsId: tag.tags_id,
                     tagsName: tag.name,
+                    autoFocus: false,
                   })
                 }
               />
