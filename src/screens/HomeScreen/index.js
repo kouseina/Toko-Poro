@@ -66,7 +66,7 @@ const HomeScreen = () => {
             .get(`${API_URL}/api/popular/post`)
             .then(resTrendNews => {
               axios
-                .get(`${API_URL}/api/tag`)
+                .get(`${API_URL}/api/category`)
                 .then(resTag => {
                   axios
                     .get(`${API_URL}/api/video`)
@@ -142,7 +142,7 @@ const HomeScreen = () => {
             <Title
               text={lang === 'ID' ? LangIndo.home.titleVideo : 'latest videos'}
             />
-            {videos.length > 0 ? <ThumbnailVideo data={videos} /> : <Loading />}
+            {videos.length > 0 ? <ThumbnailVideo data={videos} /> : <></>}
             <Gap height={20} />
             <Title
               text={
@@ -161,11 +161,11 @@ const HomeScreen = () => {
               <View style={[styles.wrapper, styles.flexWrap]}>
                 {tags.map(tag => (
                   <LabelCategory
-                    key={tag.tags_id}
+                    key={tag.category_id}
                     text={tag.name}
                     onPress={() =>
                       navigation.navigate('Search', {
-                        tagsId: tag.tags_id,
+                        tagsId: tag.category_id,
                         tagsName: tag.name,
                         autoFocus: false,
                       })

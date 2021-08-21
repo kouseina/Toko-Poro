@@ -15,7 +15,7 @@ const ListCardNews = ({data}) => {
             key={news.posts_id}
             image={`${API_URL}/${news.picture}`}
             title={news.title}
-            tags={news.tags}
+            tags={news.category}
             onPress={() =>
               navigation.navigate('DetailArticle', {newsId: news.posts_id})
             }

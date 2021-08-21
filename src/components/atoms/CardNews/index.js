@@ -34,10 +34,10 @@ const CardNews = ({image, title, onPress, desc, tags, key}) => {
               {tags.map((tag, index) => (
                 <LabelCategory
                   text={tag.name}
-                  key={tag.tags_id}
+                  key={tag.category_id}
                   onPress={() =>
                     navigation.navigate('Search', {
-                      tagsId: tag.tags_id,
+                      tagsId: tag.category_id,
                       tagsName: tag.name,
                       autoFocus: false,
                     })

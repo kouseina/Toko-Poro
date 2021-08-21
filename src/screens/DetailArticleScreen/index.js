@@ -85,7 +85,7 @@ const DetailArticleScreen = () => {
     if (newsTags.length > 0) {
       getData('language').then(language => {
         axios
-          .get(`${API_URL}/api/post/tag/${newsTags[0].tags_id}`)
+          .get(`${API_URL}/api/post/tag/${newsTags[0].category_id}`)
           .then(resNewsLike => {
             // if use indonesia language
             if (language === 'ID') {
@@ -200,10 +200,10 @@ const DetailArticleScreen = () => {
                 newsTags.map((tag, index) => (
                   <LabelCategory
                     text={tag.name}
-                    key={tag.tags_id}
+                    key={tag.category_id}
                     onPress={() =>
                       navigation.navigate('Search', {
-                        tagsId: tag.tags_id,
+                        tagsId: tag.category_id,
                         tagsName: tag.name,
                         autoFocus: false,
                       })
