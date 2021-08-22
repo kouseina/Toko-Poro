@@ -31,18 +31,18 @@ const SearchScreen = () => {
       getData('language').then(language => {
         setLoading(true);
         axios
-          .get(`${API_URL}/api/post/tag/${route.params.tagsId}`)
+          .get(`${API_URL}/api/post/category/${route.params.tagsId}`)
           .then(resNewsTags => {
             if (Object.keys(resNewsTags.data.data).length > 0) {
               if (resNewsTags.data.data) {
                 setTagName(route.params.tagsName);
-                // if use english language
-                if (language === 'ENG') {
-                  setNews(resNewsTags.data.data.english);
-                }
                 // if use indonesia language
-                else if (language === 'ID') {
+                if (language === 'ID') {
                   setNews(resNewsTags.data.data.indonesia);
+                }
+                // if use english language
+                else {
+                  setNews(resNewsTags.data.data.english);
                 }
               }
             } else {

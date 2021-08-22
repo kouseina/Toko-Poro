@@ -67,13 +67,13 @@ const DetailArticleScreen = () => {
           // if use indonesia language
           if (language === 'ID') {
             setNews(resNews.data.data.indonesia);
-            setNewsTags(resNews.data.data.indonesia.tags);
+            setNewsTags(resNews.data.data.indonesia.category);
             setLang('ID');
           }
           // if use english language
           else {
             setNews(resNews.data.data.english);
-            setNewsTags(resNews.data.data.english.tags);
+            setNewsTags(resNews.data.data.english.category);
             setLang('ENG');
           }
         })
@@ -85,7 +85,7 @@ const DetailArticleScreen = () => {
     if (newsTags.length > 0) {
       getData('language').then(language => {
         axios
-          .get(`${API_URL}/api/post/tag/${newsTags[0].category_id}`)
+          .get(`${API_URL}/api/post/category/${newsTags[0].category_id}`)
           .then(resNewsLike => {
             // if use indonesia language
             if (language === 'ID') {
