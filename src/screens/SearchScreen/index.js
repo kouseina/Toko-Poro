@@ -91,13 +91,13 @@ const SearchScreen = () => {
         getData('language').then(language => {
           if (Object.keys(resNews.data.data).length > 0) {
             console.log('gkjadi');
-            // if use english language
-            if (language === 'ENG') {
-              setNews(resNews.data.data.english);
-            }
             // if use indonesia language
-            else if (language === 'ID') {
+            if (language === 'ID') {
               setNews(resNews.data.data.indonesia);
+            }
+            // if use english language
+            else {
+              setNews(resNews.data.data.english);
             }
           } else {
             console.log('clear');

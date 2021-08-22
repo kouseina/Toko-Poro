@@ -53,7 +53,7 @@ const CarouselCardPrimary = ({item, index}) => {
               />
             ))}
           </View>
-          <TouchableOpacity onPress={() => alert('hi')}>
+          <TouchableOpacity onPress={() => null}>
             <View style={styles.wrapper}>
               <Text style={styles.subHeader}>- BY FINTEX</Text>
               <Gap width={20} />
