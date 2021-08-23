@@ -117,7 +117,7 @@ const SearchScreen = () => {
   return (
     <ContentWrapper>
       <Header
-        autoFocus={route.params ? false : true}
+        autoFocus={!route.params ? true : false}
         onChangeText={value => setSearch(value)}
         onSubmitEditing={onSubmitEditing}
         placeholder={lang === 'ID' ? LangIndo.search.search : 'Find article...'}
